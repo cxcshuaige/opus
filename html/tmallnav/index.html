@@ -1,0 +1,307 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title>旧版天猫导航</title>		
+		<style type="text/css">	
+			*{margin:0px;padding:0px;}
+			#tmallNav{font-size:14px;margin-left:10px;}
+			ul li{list-style:none;}
+			.li1 a,.li2 a,.li3 a,.li4 a,
+			.cont1 span,
+			.cont2 span,
+			.cont3 span,
+			.cont4 span,
+			.navRight .navR .jiantou{background:url(img/nav.png) no-repeat -9999px;}
+			
+			
+			.banner{height:120px;background:#b00;}
+			
+			.clear{clear:both;height:0px;line-height:0px;}
+			.navLeft{float:left;width:30px;height:270px;}
+			.navLeft li{overflow:hidden;*zoom:1;*float:left;}
+			
+			.navRight{float:left;position:relative;}
+			.navRight .navR{display:none;position:absolute;z-index:100;top:-30px;width:190px;color:#fff;}
+			.navRight .navRur{display:block;}
+			.navRight .navR h3{position:relative;height:30px;text-indent:-9999px;}
+			.navRight .navR li{position:relative;font-size:12px;padding:4px 0px 5px 0px;}
+			.navRight .navR .bd1{border-bottom:1px solid #807473;}
+			.navRight .navR .bd2{border-top:1px solid #928685;}
+			.navRight .navR .bd3{border-bottom:1px solid #5b71b0;}
+			.navRight .navR .bd4{border-top:1px solid #6981c2;}
+			.navRight .navR .bd5{border-bottom:1px solid #d27a8b;}
+			.navRight .navR .bd6{border-top:1px solid #dc8e9d;}
+			.navRight .navR .bd7{border-bottom:1px solid #907c6a;}
+			.navRight .navR .bd8{border-top:1px solid #a2907c;}
+			.navRight .navContent{position:absolute;top:0px;left:190px;display:none;width:400px;height:500px;}
+			.navRight .navContentCur{display:block;}
+			
+			.navR1{background:#8D7F7E;}
+			.navR2{background:#637ABD;}
+			.navR3{background:#D78494;}
+			.navR4{background:#998673;}
+			.navRight .navR .cur{border-top:none;padding:5px 0px 5px 0px;}
+			.navRight .navR .bdfirst{padding-top:4px;}
+			.navRight .navR .jiantou{position:absolute;top:3px;*top:5px;right:10px;width:5px;height:9px;line-height:0px;}
+			.navRight .navR p{height:20px;line-height:20px;overflow:hidden;padding-left:6px;}
+			.navRight .navR p a{padding:0px 3px;text-decoration:none;}
+			.navRight .navR p a:hover{color:#fff;text-decoration:underline;}
+			.navRight .navR1 .cur,.navRight .navR1 .navContentCur{background:#736867;}
+			.navRight .navR2 .cur,.navRight .navR2 .navContentCur{background:#5568A3;}
+			.navRight .navR3 .cur,.navRight .navR3 .navContentCur{background:#BD7382;}
+			.navRight .navR4 .cur,.navRight .navR4 .navContentCur{background:#807060;}
+			.navRight .navR1 .jiantou{background-position:-61px -70px;}
+			.navRight .navR2 .jiantou{background-position:-56px -70px;}
+			.navRight .navR3 .jiantou{background-position:-66px -70px;}
+			.navRight .navR4 .jiantou{background-position:-71px -70px;}
+			.navRight .navR1 p a{color:#e2dfdf;}
+			.navRight .navR2 p a{color:#d8deee;}
+			.navRight .navR3 p a{color:#f3ebed;}
+			.navRight .navR4 p a{color:#f3ebed;}
+			.navRight .navR .cur p a{color:#fff;}
+			.navRight h4{position:relative;font-size:12px;padding-left:10px;margin:5px 0px;}
+
+			.li1 a,.li2 a,.li3 a,.li4 a{display:block;float:right;width:26px;text-indent:-9999px;}
+			.li1 a{height:75px;background-position:-30px -70px;}
+			.li1 .cur{width:30px;background-position:0px -70px;}
+			.li2 a{height:65px;background-position:-86px -79px;}
+			.li2 .cur{width:30px;background-position:-56px -79px;}
+			.li3 a{height:64px;background-position:-30px -145px;}
+			.li3 .cur{width:30px;background-position:0px -145px;}
+			.li4 a{height:75px;background-position:-86px -144px;}
+			.li4 .cur{width:30px;background-position:-56px -144px;}
+			.cont1{background:#736867;}
+			.cont1 span,.cont2 span,.cont3 span,.cont4 span{position:absolute;top:8px;left:15px;height:14px;line-height:0px;}
+			.cont1 span{background-position:0px 0px;width:105px;}
+			.cont2{background:#5568A3;}
+			.cont2 span{background-position:0px -14px;width:123px;}
+			.cont3{background:#BD7382;}
+			.cont3 span{background-position:0px -42px;width:123px;}
+			.cont4{background:#807060;}
+			.cont4 span{background-position:0px -28px;width:123px;}
+		</style>
+	</head>
+	<body>			
+		<div class="banner"></div>
+		<div id="tmallNav">
+			<ul class="navLeft">
+				<li class="li1"><a href="javascript:{}" class="cur">所有商品</a></li>
+				<li class="li2"><a href="javascript:{}">电器城</a></li>
+				<li class="li3"><a href="javascript:{}">美容馆</a></li>
+				<li class="li4"><a href="javascript:{}">家装馆</a></li>
+			</ul>
+			<div class="navRight">
+				<div class="navR navR1 navRur">
+					<h3 class="cont1"><span>所有商品</span></h3>
+					<ul>
+						<li class="bd1 bd2">
+							<h4>服装、内衣、配件<span class="jiantou">&nbsp;</span></h4>
+							<p><a href="#">女装</a><a href="#">男装</a><a href="#">内衣</a><a href="#">家居服</a><a href="#">配件</a></p>
+							<p><a href="#">毛衣</a><a href="#">皮衣</a><a href="#">羽绒</a><a href="#">夹克</a></p>
+							<div class="navContent">a</div>
+						</li>
+						<li class="bd1 bd2">
+							<h4>鞋、箱包<span class="jiantou">&nbsp;</span></h4>
+							<p><a href="#">女装</a><a href="#">男装</a><a href="#">内衣</a><a href="#">家居服</a><a href="#">配件</a></p>
+							<p><a href="#">毛衣</a><a href="#">皮衣</a><a href="#">羽绒</a><a href="#">夹克</a></p>
+							<div class="navContent">b</div>
+						</li>
+						<li class="bd1 bd2">
+							<h4>珠宝饰品、手表眼镜<span class="jiantou">&nbsp;</span></h4>
+							<p><a href="#">女装</a><a href="#">男装</a><a href="#">内衣</a><a href="#">家居服</a><a href="#">配件</a></p>
+							<p><a href="#">毛衣</a><a href="#">皮衣</a><a href="#">羽绒</a><a href="#">夹克</a></p>
+							<div class="navContent">c</div>
+						</li>
+						<li class="bd1 bd2">
+							<h4>化妆品<span class="jiantou">&nbsp;</span></h4>
+							<p><a href="#">女装</a><a href="#">男装</a><a href="#">内衣</a><a href="#">家居服</a><a href="#">配件</a></p>
+							<p><a href="#">毛衣</a><a href="#">皮衣</a><a href="#">羽绒</a><a href="#">夹克</a></p>
+							<div class="navContent">d</div>
+						</li>
+						<li class="bd1 bd2">
+							<h4>运动、户外<span class="jiantou">&nbsp;</span></h4>
+							<p><a href="#">女装</a><a href="#">男装</a><a href="#">内衣</a><a href="#">家居服</a><a href="#">配件</a></p>
+							<p><a href="#">毛衣</a><a href="#">皮衣</a><a href="#">羽绒</a><a href="#">夹克</a></p>
+							<div class="navContent">e</div>
+						</li>
+						<li class="bd1 bd2">
+							<h4>手机、数码<span class="jiantou">&nbsp;</span></h4>
+							<p><a href="#">女装</a><a href="#">男装</a><a href="#">内衣</a><a href="#">家居服</a><a href="#">配件</a></p>
+							<p><a href="#">毛衣</a><a href="#">皮衣</a><a href="#">羽绒</a><a href="#">夹克</a></p>
+							<div class="navContent">f</div>
+						</li>
+						<li class="bd1 bd2">
+							<h4>家用电器<span class="jiantou">&nbsp;</span></h4>
+							<p><a href="#">女装</a><a href="#">男装</a><a href="#">内衣</a><a href="#">家居服</a><a href="#">配件</a></p>
+							<p><a href="#">毛衣</a><a href="#">皮衣</a><a href="#">羽绒</a><a href="#">夹克</a></p>
+							<div class="navContent">g</div>
+						</li>
+						<li class="bd1 bd2">
+							<h4>家具、建材<span class="jiantou">&nbsp;</span></h4>
+							<p><a href="#">女装</a><a href="#">男装</a><a href="#">内衣</a><a href="#">家居服</a><a href="#">配件</a></p>
+							<p><a href="#">毛衣</a><a href="#">皮衣</a><a href="#">羽绒</a><a href="#">夹克</a></p>
+							<div class="navContent">h</div>
+						</li>
+						<li class="bd1 bd2">
+							<h4>居家生活<span class="jiantou">&nbsp;</span></h4>
+							<p><a href="#">女装</a><a href="#">男装</a><a href="#">内衣</a><a href="#">家居服</a><a href="#">配件</a></p>
+							<p><a href="#">毛衣</a><a href="#">皮衣</a><a href="#">羽绒</a><a href="#">夹克</a></p>
+							<div class="navContent"></div>
+						</li>
+						<li class="bd1 bd2">
+							<h4>食品、保健<span class="jiantou">&nbsp;</span></h4>
+							<p><a href="#">女装</a><a href="#">男装</a><a href="#">内衣</a><a href="#">家居服</a><a href="#">配件</a></p>
+							<p><a href="#">毛衣</a><a href="#">皮衣</a><a href="#">羽绒</a><a href="#">夹克</a></p>
+							<div class="navContent"></div>
+						</li>
+					</ul>
+				</div>
+				<div class="navR navR2">
+					<h3 class="cont2"><span>电器城</span></h3>
+					<ul>
+						<li class="bd3 bd4">
+							<h4>服装、内衣、配件<span class="jiantou">&nbsp;</span></h4>
+							<p><a href="#">女装</a><a href="#">男装</a><a href="#">内衣</a><a href="#">家居服</a><a href="#">配件</a></p>
+							<p><a href="#">毛衣</a><a href="#">皮衣</a><a href="#">羽绒</a><a href="#">夹克</a></p>
+							<div class="navContent">a</div>
+						</li>
+						<li class="bd3 bd4">
+							<h4>鞋、箱包<span class="jiantou">&nbsp;</span></h4>
+							<p><a href="#">女装</a><a href="#">男装</a><a href="#">内衣</a><a href="#">家居服</a><a href="#">配件</a></p>
+							<p><a href="#">毛衣</a><a href="#">皮衣</a><a href="#">羽绒</a><a href="#">夹克</a></p>
+							<div class="navContent">b</div>
+						</li>
+						<li class="bd3 bd4">
+							<h4>珠宝饰品、手表眼镜<span class="jiantou">&nbsp;</span></h4>
+							<p><a href="#">女装</a><a href="#">男装</a><a href="#">内衣</a><a href="#">家居服</a><a href="#">配件</a></p>
+							<p><a href="#">毛衣</a><a href="#">皮衣</a><a href="#">羽绒</a><a href="#">夹克</a></p>
+							<div class="navContent">c</div>
+						</li>
+						<li class="bd3 bd4">
+							<h4>化妆品<span class="jiantou">&nbsp;</span></h4>
+							<p><a href="#">女装</a><a href="#">男装</a><a href="#">内衣</a><a href="#">家居服</a><a href="#">配件</a></p>
+							<p><a href="#">毛衣</a><a href="#">皮衣</a><a href="#">羽绒</a><a href="#">夹克</a></p>
+							<div class="navContent">d</div>
+						</li>
+						<li class="bd3 bd4">
+							<h4>运动、户外<span class="jiantou">&nbsp;</span></h4>
+							<p><a href="#">女装</a><a href="#">男装</a><a href="#">内衣</a><a href="#">家居服</a><a href="#">配件</a></p>
+							<p><a href="#">毛衣</a><a href="#">皮衣</a><a href="#">羽绒</a><a href="#">夹克</a></p>
+							<div class="navContent">e</div>
+						</li>
+						<li class="bd3 bd4">
+							<h4>手机、数码<span class="jiantou">&nbsp;</span></h4>
+							<p><a href="#">女装</a><a href="#">男装</a><a href="#">内衣</a><a href="#">家居服</a><a href="#">配件</a></p>
+							<p><a href="#">毛衣</a><a href="#">皮衣</a><a href="#">羽绒</a><a href="#">夹克</a></p>
+							<div class="navContent">f</div>
+						</li>
+					</ul>
+				</div>
+				<div class="navR navR3">
+					<h3 class="cont3"><span>美容馆</span></h3>
+					<ul>
+						<li class="bd5 bd6">
+							<h4>服装、内衣、配件<span class="jiantou">&nbsp;</span></h4>
+							<p><a href="#">女装</a><a href="#">男装</a><a href="#">内衣</a><a href="#">家居服</a><a href="#">配件</a></p>
+							<p><a href="#">毛衣</a><a href="#">皮衣</a><a href="#">羽绒</a><a href="#">夹克</a></p>
+							<div class="navContent">a</div>
+						</li>
+						<li class="bd5 bd6">
+							<h4>鞋、箱包<span class="jiantou">&nbsp;</span></h4>
+							<p><a href="#">女装</a><a href="#">男装</a><a href="#">内衣</a><a href="#">家居服</a><a href="#">配件</a></p>
+							<p><a href="#">毛衣</a><a href="#">皮衣</a><a href="#">羽绒</a><a href="#">夹克</a></p>
+							<div class="navContent">b</div>
+						</li>
+						<li class="bd5 bd6">
+							<h4>珠宝饰品、手表眼镜<span class="jiantou">&nbsp;</span></h4>
+							<p><a href="#">女装</a><a href="#">男装</a><a href="#">内衣</a><a href="#">家居服</a><a href="#">配件</a></p>
+							<p><a href="#">毛衣</a><a href="#">皮衣</a><a href="#">羽绒</a><a href="#">夹克</a></p>
+							<div class="navContent">c</div>
+						</li>
+						<li class="bd5 bd6">
+							<h4>化妆品<span class="jiantou">&nbsp;</span></h4>
+							<p><a href="#">女装</a><a href="#">男装</a><a href="#">内衣</a><a href="#">家居服</a><a href="#">配件</a></p>
+							<p><a href="#">毛衣</a><a href="#">皮衣</a><a href="#">羽绒</a><a href="#">夹克</a></p>
+							<div class="navContent">d</div>
+						</li>
+						<li class="bd5 bd6">
+							<h4>运动、户外<span class="jiantou">&nbsp;</span></h4>
+							<p><a href="#">女装</a><a href="#">男装</a><a href="#">内衣</a><a href="#">家居服</a><a href="#">配件</a></p>
+							<p><a href="#">毛衣</a><a href="#">皮衣</a><a href="#">羽绒</a><a href="#">夹克</a></p>
+							<div class="navContent">e</div>
+						</li>
+					</ul>
+				</div>
+				<div class="navR navR4">
+					<h3 class="cont4"><span>家装馆</span></h3>
+					<ul>
+						<li class="bd7 bd8">
+							<h4>服装、内衣、配件<span class="jiantou">&nbsp;</span></h4>
+							<p><a href="#">女装</a><a href="#">男装</a><a href="#">内衣</a><a href="#">家居服</a><a href="#">配件</a></p>
+							<p><a href="#">毛衣</a><a href="#">皮衣</a><a href="#">羽绒</a><a href="#">夹克</a></p>
+							<div class="navContent">a</div>
+						</li>
+						<li class="bd7 bd8">
+							<h4>鞋、箱包<span class="jiantou">&nbsp;</span></h4>
+							<p><a href="#">女装</a><a href="#">男装</a><a href="#">内衣</a><a href="#">家居服</a><a href="#">配件</a></p>
+							<p><a href="#">毛衣</a><a href="#">皮衣</a><a href="#">羽绒</a><a href="#">夹克</a></p>
+							<div class="navContent">b</div>
+						</li>
+						<li class="bd7 bd8">
+							<h4>珠宝饰品、手表眼镜<span class="jiantou">&nbsp;</span></h4>
+							<p><a href="#">女装</a><a href="#">男装</a><a href="#">内衣</a><a href="#">家居服</a><a href="#">配件</a></p>
+							<p><a href="#">毛衣</a><a href="#">皮衣</a><a href="#">羽绒</a><a href="#">夹克</a></p>
+							<div class="navContent">c</div>
+						</li>
+						<li class="bd7 bd8">
+							<h4>化妆品<span class="jiantou">&nbsp;</span></h4>
+							<p><a href="#">女装</a><a href="#">男装</a><a href="#">内衣</a><a href="#">家居服</a><a href="#">配件</a></p>
+							<p><a href="#">毛衣</a><a href="#">皮衣</a><a href="#">羽绒</a><a href="#">夹克</a></p>
+							<div class="navContent">d</div>
+						</li>
+						<li class="bd7 bd8">
+							<h4>运动、户外<span class="jiantou">&nbsp;</span></h4>
+							<p><a href="#">女装</a><a href="#">男装</a><a href="#">内衣</a><a href="#">家居服</a><a href="#">配件</a></p>
+							<p><a href="#">毛衣</a><a href="#">皮衣</a><a href="#">羽绒</a><a href="#">夹克</a></p>
+							<div class="navContent">e</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<script src="../../js/seajs/2.1/sea.js"></script>
+		<script src="../../js/config.js"></script>
+		<script type="text/javascript">
+			seajs.use(['$','app/tmallnav/TreeNavHover.js'],function($,TreeNavHover){
+				/*
+				* time : 2012.2.27 
+				* author : whyboy
+				* 参数说明
+				* navOne : 一级菜单dom集合
+				* navOneCon : 一级菜单内容
+				* navTwo : 二级菜单dom集合
+				* navTwoCon : 二级菜单内容
+				* navOneClass : 一级菜单 hover css
+				* navOneConClass ： 一级菜单内容 hover css
+				* navTwoClass ： 二级菜单 hover css
+				* navTwoConClass ：二级菜单内容 hover css
+				*/
+				$(function($){
+					new TreeNavHover({
+						navOne:$('.navLeft li'), 
+						navOneCon:$('.navRight .navR'),
+						navTwo:$('.navRight .navR li'),
+						navTwoCon:$('.navRight .navR .navContent'),
+						navOneClass:'cur',
+						navOneConClass:'navRur',
+						navTwoClass:'cur',
+						navTwoConClass:'navContentCur'
+					});
+				});
+			});
+		</script>					
+	</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>表单验证</title>
+<style type="text/css">
+.validate{line-height:30px;display: block;}
+	.validate .inp{height:24px;padding:3px 5px;width:285px;border:1px solid #ccc;line-height:23px;}
+	.validate .selectInp{position:relative;*top:5px;height:30px;line-height:30px;border:1px solid #ccc;}
+	.validate .area{height:90px;width:490px;border:1px solid #ccc;font-size:13px;}
+	.validate .zp{width:120px;text-align: right;}
+		.validate .zp img{vertical-align: top;padding:5px 5px 0 5px;*padding-top:0;border: 1px solid #fff;}
+	.validate .imgp{border: 1px solid #ccc;}
+	.validate .imgp img{width:149px;}
+	.validate .tip,.validate .imgtip{color: #666;}
+	.validate .w160{width:151px;}
+	.validate .imgtip{line-height:20px;width:380px;}
+	.validate .swfUp{display:block;width:103px;height:33px;background:url(../../images/swfUpload.png) no-repeat;}
+	.validate .swfP{height:33px;overflow: hidden;margin-top:10px;}
+	.validate .errTip{color:#d00;}
+</style>
+</head>
+<body navId="6">
+<div class="k_w">
+	<div class="k_w950 in_main">
+		<div class="pl105">
+			<p class="adwk_head_tip k_mt30">带有 “<i class="k_cd00">*</i>” 符号为必填项，资料提交后不可再修改。</p>
+			<label class="J_validate k_ovh k_mt15 validate">
+				<span class="k_f14 k_fl zp">自我介绍 <i class="k_cd00">*</i>：</span>
+				<textarea id="Descriptions" cols="20" regular="selfIntro" ety="自我介绍不能为空！" class="J_input k_fl area"></textarea>
+				<span class="J_tips k_fl k_pl10 tip">10-70个字</span>
+			</label>
+			
+			<label class="J_validate k_ovh k_mt15 validate">
+				<span class="k_f14 k_fl zp">您的手机号码 <i class="k_cd00">*</i>：</span>
+				<input id="Mobile" type="text" regular="mobile" ety="手机号码不能为空！" class="J_input k_fl inp" style="width:150px;" />
+				<span class="J_tips k_fl k_pl10 tip">用于作品审核结果、入围、获奖通知</span>
+			</label>
+			
+			<label class="J_validate k_ovh k_mt15 validate">
+				<span class="k_f14 k_fl zp">真实姓名 <i class="k_cd00">*</i>：</span>
+				<input id="UserName" type="text" regular="notSpace" ety="真是姓名不能为空！" class="J_input k_fl inp" style="width:150px;"/>
+				<span class="J_tips k_fl k_pl10 tip"></span>
+			</label>
+			<p class="k_ovh mySub"><label class="c_btn k_spes"><input type="button" id="Submit" value="提交" class="k_spes btn" /></label></p>
+		</div>
+	</div>
+</div>
+<script src="../../js/seajs/2.1/sea.js"></script>
+<script src="../../js/config.js"></script>
+<script type="text/javascript">
+seajs.use(['$','app/validate/Validate.js'],function($,Validate){
+	$(function($){
+		var validateDom = jQuery('.J_validate');
+		var Vali = new Validate(validateDom);
+		$('#Submit').click(function(){
+			var validateFlag = Vali.checkAll();
+			if(!validateFlag) return;
+		});
+	});
+})
+</script>
+</body>
+</html>

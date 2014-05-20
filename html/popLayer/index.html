@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>popLayer</title>
+<style type="text/css">
+  *{margin:0;padding:0;}
+  .c_popLayer{display:none;position:absolute;z-index:6000;width:289px;}
+  .c_popLayer .c_popPoint{display:block;position:absolute;background:url(img/3.png) no-repeat;top:0;width:9px;height:14px;_font-size:0;_line-height:0px;}
+  .c_popLayer .up{top:-8px;background-position:-455px -157px;}
+  .c_popLayer .down{background-position:-465px -160px;}
+  .c_popLayer .left{background-position:-452px -170px;}
+  .c_popLayer .right{background-position:-462px -170px;}
+  .c_popLayer .c_popClose{display:none;position:absolute;background:url(img/2.png) no-repeat;width:9px;height:8px;top:8px;right:10px;_font-size:0;_line-height:0px;cursor:pointer;}
+  .c_popLayer .c_popCont{background:#fff;
+  height: auto;
+  color: #fff;
+  line-height: 24px;
+  text-align: left;
+  background: url(http://www1.pcgames.com.cn/zt/yxsjk/images/sboxmid.png) repeat-y;
+  }
+  .c_popLayer .c_modelLayerIf{position:absolute;top:0;background:#000;left:0;width:100%;height:100%;z-index:-1;} /* if IE6 */
+
+  .sboxtop{height: 6px;font-size:0;line-height: 0;background: url(http://www1.pcgames.com.cn/zt/yxsjk/images/sboxtop.png) no-repeat 0 0;}
+  .scontent{padding:10px;}
+  .sboxfoot{height: 6px;font-size:0;line-height: 0;background: url(http://www1.pcgames.com.cn/zt/yxsjk/images/sboxfoot.png) no-repeat 0 0;}
+</style>
+</head>
+<body>
+    <div class="J_popLayer" names="pop" style="margin:30px;width:100px;border:1px solid #000;">移动我这里弹出来</div>
+    <div class="J_popLayer2" style="margin:30px;width:100px;border:1px solid #000;">点我这里弹出来</div>
+    <script src="../../js/seajs/2.1/sea.js"></script>
+    <script src="../../js/config.js"></script>
+    <script type="text/javascript">
+      seajs.use(['$','app/popLayer/PopLayer.js'],function($,PopLayer){
+        $('.J_popLayer').each(function(){
+          $(this).hover(function(){
+            var AA = function(){
+              var html = '<div class="sboxtop"></div>';
+                  html +='<div class="scontent clearfix" id="showcontent">';
+                  html +='<i class="bt">敏捷便鞋</i>';
+                  html +='<i>';
+                  html +='<p class="fr">物品</p>';
+                  html +='<span style="color:#0090ff">价格： 150</span>';
+                  html +='<br>';
+                  html +='<span style="color:#0090ff">购买地点： 饰品商人,野外商人</span>';
+                  html +='<br>';
+                  html +='<i class="jg"></i>';
+                  html +='<span style="color:"> +3点敏捷</span>';
+                  html +='<br>';
+                  html +='<span style="color:#FFFF00"> 通俗称呼：丝袜</span>';
+                  html +='<br>';
+                  html +='<i class="jg"></i>';
+                  html +='</i>';
+                  html +='<i class="t4">可合成</i>';
+                  html +='<i class="pic">';
+                  html +='<img src="http://img.pconline.com.cn/images/upload/upc/tx/gamedb/1204/01/c0/11111288_11111288_1333248513656_30x30.jpg" style="width:25px;hight:25px"> 幽灵系带';
+                  html +='</i>';
+                  html +='<i class="pic">';
+                  html +='<img src="http://img.pconline.com.cn/images/upload/upc/tx/gamedb/1204/01/c0/11116500_11116500_1333274678467_30x30.jpg" style="width:25px;hight:25px"> 穷鬼盾';
+                  html +='</i>';
+                  html +='</div>';
+                  html +='<div class="sboxfoot"></div>';
+              return html;
+            }
+            PopLayer.get(0).showPop({
+              targetDom : $(this),
+              layerY : 10,
+              layerX : 2,
+              closeBtn : false
+            },AA);
+          },function(){
+              PopLayer.get(0).popLayerHide();
+          });
+        });
+
+        $('.J_popLayer2').click(function(){
+            var AA = function(){
+              var html = '<div class="sboxtop"></div>';
+                  html +='<div class="scontent clearfix" id="showcontent">';
+                  html +='发我已经出来了'
+                  html +='</div>';
+                  html +='<div class="sboxfoot"></div>';
+              return html;
+            }
+            PopLayer.get(1,'click').showPop({
+              targetDom : $(this),
+              layerY : 0,
+              layerX : 0,
+              closeBtn : true
+            },AA);
+        });
+      });
+    </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title>图片轮播</title>		
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			ul li{list-style: none;}
+			img{border:none;}
+			.c_slidePic{width:520px;position: relative;margin:100px;height: 280px;overflow: hidden;}
+			.c_slidePic_ul{position: absolute;top:0;left:0;}
+			.c_slidePic_ul li{float: left;width:520px;overflow: hidden;}
+			.c_leftBtn{position: absolute;z-index: 1;left:0;top:0}
+			.c_rightBtn{position: absolute;z-index: 1;left:20px;top: 0}
+			.c_indicate{position: absolute;left:50%;bottom:20px;}
+			.c_indicate li{text-indent: -9999px;float: left;display:inline;margin-left:2px;border: 1px solid #000;font-size:0;line-height:0;width:10px;height: 10px;cursor:pointer;background:#fff;}
+			.c_indicate .cur{background:#000;}
+		</style>
+		
+	</head>
+	<body>
+		<div class="c_slidePic" id="slidePic">
+			<ul class="J_slide c_slidePic_ul">
+				<li class="J_cell c_slidePic_cell">
+					<img src="http://gtms01.alicdn.com/tps/i1/T1mk7FFedeXXazuKP7-520-280.jpg"/>
+				</li>
+				<li class="J_cell c_slidePic_cell">
+					<img src="http://i.mmcdn.cn/simba/img/T1wW.IFmlcXXb1upjX.jpg"/>
+				</li>
+				<li class="J_cell c_slidePic_cell">
+					<img src="http://i.mmcdn.cn/simba/img/T1WZHkFdRiXXb1upjX.jpg"/>
+				</li>
+				<li class="J_cell c_slidePic_cell">
+					<img src="http://gtms01.alicdn.com/tps/i1/T1iwIKFo8bXXazuKP7-520-280.jpg"/>
+				</li>
+			</ul>
+
+		</div>
+
+		<script src="../../js/seajs/2.1/sea.js"></script>
+		<script src="../../js/config.js"></script>
+		<script type="text/javascript">
+			seajs.use(['$','app/slidePic/slidePic'],function($,slidePic){
+				$(function($){
+					new slidePic({
+						slideContainerWrap : $('#slidePic')
+
+					})
+				});
+			});
+		</script>
+	</body>
+</html>

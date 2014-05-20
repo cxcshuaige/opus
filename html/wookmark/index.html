@@ -1,0 +1,319 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>瀑布流实践</title>
+<style type="text/css">
+*{margin: 0;padding: 0;}
+body{font-size:12px}
+.wook{position: relative;width: 950px;margin:10px auto;}
+    .wook .fullWook{background:#eee;-webkit-box-shadow: 0 0 5px rgba(200, 200, 200, 0.6);
+            -moz-box-shadow: 0 0 5px rgba(200, 200, 200, 0.6);
+                box-shadow: 0 0 5px rgba(200, 200, 200, 0.6);}
+    .wookproduct .productList-item{display: none;border: 1px solid #ccc;background: #fff;padding:9px;position: absolute;list-style:none;
+        -webkit-box-shadow: 0 0 5px rgba(150, 150, 150, 0.6);
+            -moz-box-shadow: 0 0 5px rgba(150, 150, 150, 0.6);
+                box-shadow: 0 0 5px rgba(150, 150, 150, 0.6);
+    }
+    
+    .wookproduct .productList-item:hover{
+        border: 1px solid #999;
+        -webkit-box-shadow: 0 0 5px rgba(150, 150, 150, 1);
+            -moz-box-shadow: 0 0 5px rgba(150, 150, 150, 1);
+                box-shadow: 0 0 5px rgba(150, 150, 150, 1);
+    }
+
+    .wookproduct .productList-item img{vertical-align: top; background:url(http://www.kadang.com/kadang/themes/v5.0/img/load.gif) no-repeat center center;}
+    .wookproduct .productList-item .productInfo{width:280px;}
+    .wookproduct .productList-item .productComments{width:270px;}
+    .productInfo-img, .productInfo-price {margin-bottom: 10px;}
+        .productInfo-img {position: relative;}
+        .productInfo-img span{display: none;position: absolute;top: 4px;left: 4px;overflow: hidden;width: 224px;height: 26px;background: url(/kadang/themes/v5.0/img/2013/7th/7th-bg.png) 0 -60px repeat-x;_background: url(/kadang/themes/v5.0/img/2013/7th/7th-bg8.png) 0 -60px repeat-x;text-align: left;font-size: 14px;font-weight: 700;color: #333;line-height: 26px;text-indent: 4px;}
+
+    .productComments {padding:0 5px;background: #f6f6f6;color: #666;}
+        .commentsList {overflow: hidden;padding-bottom:5px;}
+        .commentsList-item {padding: 10px 0;border-bottom: 1px solid #ddd;word-wrap: break-word;word-break: break-all;font-family: 宋体;}
+        .commentsInfo-user {font-weight: 700;}
+        .commentsInfo-content {}
+        .conmentsInfo-date {margin-left: 10px;color: #999;}
+    .moreHandle,.collapseHandle{display: none;}
+
+    .productInfo-price{overflow: hidden;}
+    .productInfo-price-bd {float: left;text-align: left;width: 180px;}
+    .productInfo-price-1 {overflow: hidden;height: 14px;line-height: 14px;}
+    .productInfo-price-2 {overflow: hidden;height: 12px;line-height: 12px;}
+    .productInfo-price .productInfo-customLink {float: right;}
+    .productInfo-price-current {float: left;color: #d00;}
+    .productInfo-freeShipping {float: left;display: inline;margin-left: 3px;padding: 0 1px;background: #80c551;color: #fff;}
+    .productInfo-price-old {-webkit-text-size-adjust: none;font-size: 11px;color: #666;text-decoration: line-through;}
+    .productInfo-price-cutPrice {display: none;}
+    .productInfo-customLink:link, 
+    .productInfo-customLink:visited, 
+    .productInfo-customLink:hover, 
+    .productInfo-customLink:active{
+        color:#fff;text-decoration: none;
+    }
+    .productInfo-customLink {
+        display: block;
+        padding: 0 22px 0 8px;
+        height: 26px;
+        background: url(/kadang/themes/v5.0/img/2013/7th/7th-bg.png) right -90px no-repeat;
+        line-height: 26px;
+        font-family: 宋体;
+    }
+    
+    .wrapperDiv{height:40px;margin-bottom: 10px;}
+    .productTypeWrapper {padding: 10px 25px;height: 20px;background: url(/kadang/themes/v5.0/img/2013/7th/type-bg.png) 0 0 repeat-x;}
+    .moveDao{position:fixed;top:0px;_position:absolute;_top:expression(documentElement.scrollTop);width:900px;z-index: 1000;_margin-top:-502px;}
+    .typeList {height: 20px;font-size: 14px;font-weight: 700;line-height: 20px;}
+        .typeList dt, .typeList dd {float: left;display: inline;}
+        .typeList dd {margin-left: 10px;padding-left: 10px;border-left: 1px solid #ababab;}
+        .typeList .typeList-first {padding-left: 0;border-left: none;}
+        .typeList a:link, .typeList a:visited {color: #010101;text-decoration: none;padding:0px 10px;}
+        .typeList a:hover, .typeList a:active {color: #fff;text-decoration: underline;background-color: #f80;padding:0px 10px;}
+        .typeList .active a:link, .typeList .active a:visited {color: #fff;text-decoration: none;background-color: #f80;padding:0px 10px;}
+        .typeList .active a:hover, .typeList .active a:active {color: #fff;text-decoration: underline;background-color: #f80;padding:0px 10px;}
+
+    .moreHandleWrapper{padding: 5px 0 10px 0;overflow: hidden;line-height: 20px;}
+    .moreHandleWrapper .moreHandle{float: left;}
+    .moreHandleWrapper .collapseHandle{float: right;}
+    .moreHandleWrapper a:link,.moreHandleWrapper a:visited{color: #666;font-family: '宋体';}
+    .moreHandleWrapper a:hover{color: #017ad5;text-decoration: underline;}
+
+    .jias{position: absolute;top:297px;font-size: 12px;z-index: 100;color: #666;}
+    .jias .c_kdj{text-decoration: line-through;}
+    .jias .c_gdj{color: #FB3292;}
+    .jias .J_gdj{font-size: 18px;font-weight: bold;}
+    .jia1{left: 50px;}
+    .jia2{left: 370px;}
+    .jia3{left: 680px;}
+    .indexTop{display: none;left: 50%;bottom: 50px;z-index: 500;margin-left: 490px;width: 40px;height: 50px;position:fixed;_position:absolute;_top:expression(documentElement.scrollTop + 600);z-index:7000;background: url(/kadang/themes/v5.0/img/hd-returnTop.png) no-repeat 0 0;}
+</style>
+</head>
+<body>
+<div class="wook" id="wook">
+    <ul id="wookproduct" class="wookproduct" kdref="380">
+        <li id="5985" class="productList-item newIdea photo">
+            <div class="productInfo">
+                <p class="productInfo-img">
+                    <span>神奇魔术变色杯 爱心杯柄</span>
+                    <a href="/diy/detail5985.html" target="_blank">
+                        <img src="http://www.kadang.com/static/hd/2013/7th/5985.gif" width="280" height="246" alt="神奇魔术变色杯 爱心杯柄" />
+                    </a>
+                </p>
+            </div>
+        </li>
+        
+        <li id="D2794" class="productList-item watch">
+            <div class="productInfo">
+                <p class="productInfo-img">
+                    <span>永不凋谢 24K金箔玫瑰花</span>
+                    <a href="/diy/detail2794-2.html" target="_blank">
+                        <img src="http://www.kadang.com/static/hd/2013/7th/D2794.jpg" width="280" height="280" alt="永不凋谢 24K金箔玫瑰花" />
+                    </a>
+                </p>
+            </div>
+        </li>
+        
+        <li id="D2464" class="productList-item toGirl">
+            <div class="productInfo">
+                <p class="productInfo-img">
+                    <span>海洋之心 水晶项链</span>
+                    <a href="/diy/detail2464-2.html" target="_blank">
+                        <img src="http://www.kadang.com/static/hd/2013/7th/D2464.jpg" width="280" height="280" alt="海洋之心 水晶项链" />
+                    </a>
+                </p>
+            </div>
+        </li>
+        
+        <li id="D2933" class="productList-item toBoy">
+            <div class="productInfo">
+                <p class="productInfo-img">
+                    <span>爱独特 立体钻石切面石英女表</span>
+                    <a href="/diy/detail2933-2.html" target="_blank">
+                        <img src="http://www.kadang.com/static/hd/2013/7th/D2933.jpg" width="280" height="360" alt="爱独特 立体钻石切面石英女表" />
+                    </a>
+                </p>
+            </div>
+        </li>
+        
+        <li id="D2804" class="productList-item lover">
+            <div class="productInfo">
+                <p class="productInfo-img">
+                    <span>爱无止境 名字定制心形钻对戒</span>
+                    <a href="/diy/detail2804-2.html" target="_blank">
+                        <img src="http://www.kadang.com/static/hd/2013/7th/D2804.jpg" width="280" height="310" alt="爱无止境 名字定制心形钻对戒" />
+                    </a>
+                </p>
+            </div>
+        </li>
+        
+        <li id="D2139" class="productList-item toGirl">
+            <div class="productInfo">
+                <p class="productInfo-img">
+                    <span>永恒真爱 天然玫瑰镀24K金项链</span>
+                    <a href="/diy/detail2139-2.html" target="_blank">
+                        <img src="http://www.kadang.com/static/hd/2013/7th/D2139.jpg" width="280" height="350" alt="永恒真爱 天然玫瑰镀24K金项链" />
+                    </a>
+                </p>
+            </div>
+        </li>
+    </ul>
+</div>
+<div style="height:100px"></div>
+<script src="../../js/seajs/2.1/sea.js"></script>
+<script src="../../js/config.js"></script>
+<script type="text/javascript">
+seajs.use(['$','app/wookmark/Wookmark.js','app/wookmark/commentsData-debug.js','app/wookmark/indexProductData-debug.js'],function($,wookmark,commentsData,productData){
+
+    var __bind = function(fn,me){
+        return function(){
+            return fn.apply(me,arguments);
+        }
+    }
+    var page = 2,loadAll = false;
+    var cateGoryNow = 'all';
+    var wookproduct = $('#wookproduct');
+    var options = {
+        align: 'center',   //布局参数  left right center
+        autoResize: false, //是否支持窗口重置
+        container: $('#wook'),   //瀑布流所在容器
+        itemWidth: 300,       //瀑布单元的宽度
+        offset: 16,   //每个单元的水平间隔距离
+        resizeDelay: 50
+    }
+    var wook = new wookmark(options);
+    wook.layout(wookproduct.find('.productList-item'),callback);
+    
+//瀑布流创建单个瀑布元素后的回调函数
+    function callback(item){
+        var item = item, id = item.attr("id");
+        var itemComments = commentsData[id];
+        if(itemComments && itemComments.length) {
+            var commentsLength = itemComments.length;
+            if(commentsLength < 1) return;
+            var productComments = $(
+                '<div class="productComments">' +
+                    '<ul class="J_comment commentsList">' +
+                        '<li class="commentsList-item">' +
+                            '<em class="commentsInfo-user">'+ itemComments[0].name +'：</em>' +
+                            '<span class="commentsInfo-content">'+ itemComments[0].des +'</span>' +
+                            '<span class="conmentsInfo-date">'+ itemComments[0].time +'</span>' +
+                        '</li>' +
+                    '</ul>' +
+                '</div>');
+            if(commentsLength > 1) {
+                productComments.append(
+                    '<p class="moreHandleWrapper">' +
+                        '<a href="javascript:{}" class="J_moreHandle moreHandle" title="查看更多评论">查看更多评论>></a>' +
+                        '<a href="javascript:{}" class="J_handle collapseHandle" title="收起评论">收起评论</a>' +
+                    '</p>'
+                );
+                //item.data("comments", itemComments.slice(1));
+            }
+            item.append(productComments);
+            var mem = item.find('.J_moreHandle'),
+                meh = item.find('.J_handle');
+            if(commentsLength > 1){
+                mem.css('display','inline');
+                mem.attr('data-cmtIndex',1).click(__bind(moreHandle,{item:item,me:mem,it:meh,data:itemComments}));
+                meh.click(__bind(handle,{item:item,me:meh,it:mem}));
+            }
+        }
+    }
+    
+//点击收起评论    
+    function handle(e){
+        var com = this.item.find('.J_comment'),
+            templi = com.find('li').eq(0);
+        com.html(templi);
+        wook.updateColumn(this.item.attr('data-index'));
+        this.it.attr('data-cmtIndex',1);
+        this.it.css('display','inline');
+        this.me.css('display','none');
+    }
+    
+//点击展开评论
+    function moreHandle(e){
+        var com = this.item.find('.J_comment'),
+            indexbefore = ~~(this.me.attr('data-cmtIndex'));
+        var html = '',i= 0;
+        for(;i<2;i++){
+            if(this.data.length <= (indexbefore+i)) {
+                this.me.css('display','none');
+                break;
+            }
+            html += '<li class="commentsList-item">';
+            html +=     '<em class="commentsInfo-user">'+ this.data[indexbefore+i].name +'：</em>';
+            html +=     '<span class="commentsInfo-content">'+ this.data[indexbefore+i].des +'</span>';
+            html +=     '<span class="conmentsInfo-date">'+ this.data[indexbefore+i].time +'</span>';
+            html += '</li>';
+        }
+        com.append(html);
+        this.it.css('display','inline');
+        this.me.attr('data-cmtIndex',(indexbefore+i));
+        wook.updateColumn(this.item.attr('data-index'));
+        wook.fullWookClear();
+    }
+    
+//得到数据源，并对数据源进行操作
+    function creatload(data){
+        var html = '';
+        for(var i = 0; i < data.length; i++){
+            var item = data[i];
+            html += '<li id="'+item.id+'" class="productList-item '+item.cateGory+'">';
+                html+='<div class="productInfo">';
+                    html+='<p class="productInfo-img">';
+                        html+='<span>'+item.name+'</span>';
+                        html+='<a href="'+item.link+'" target="_blank">';
+                            html+='<img src="http://static2.i.kadang.cn'+item.imgsrc+'" width="280" height="'+ Math.round(item.height/item.width*280)+ '" />';
+                        html+='</a>';
+                    html+='</p>';
+                html+='</div>';
+            html +='</li>';
+        }
+        wookproduct.append(html);
+        var wookli = wookproduct.find('.productList-item');
+        wook.layout(wookli,callback);
+        afterLoad();
+    }
+    
+//埋点，埋flag参数    
+    function afterLoad(){
+        // new GradePriceV3({
+        //     attrDom:$('.J_calcProm'+page),
+        //     coup: 0,
+        //     byj : 0,
+        //     xsd : 2
+        // });
+        page++;
+        //wbt对外方法    
+       // WBT_BuryPoint.get().resetBury($('#wookproduct'),'home');
+    }
+
+//载入数据  模拟ajax
+    function dataOnload(){
+        var data = productData[page];
+        if(data){
+            creatload(data);
+        }else{
+            if(loadAll) return;
+            loadAll = true;
+            //用灰色填满
+            wook.fullWook();
+        }   
+    }
+
+//下拉事件执行    
+    function onScroll(){
+        var closeToBottom = ($(window).scrollTop() + $(window).height() > $(document).height() - 400);
+        if(closeToBottom){
+            dataOnload();
+        }
+    }   
+
+    $(window).bind('scroll', onScroll);
+})
+</script>
+</body>
+</html>

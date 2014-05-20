@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>测试</title>
+	<style type="text/css">
+		*{padding: 0;margin: 0;}
+		ul{list-style: none;}
+	</style>
+</head>
+<body>
+	<div class="adminNavL" id="AdminNav">
+		<ul class="J_navL navl"></ul>
+		<div class="J_navR navr"></div>
+	</div>
+<script src="../../js/seajs/2.1/sea.js"></script>
+<script src="../../js/config.js"></script>
+<script>
+    seajs.use(['$','app/leftManager/init.js'],function($,init){
+    	$(function(){
+    		var parentDom = $('#AdminNav'),
+			navL = parentDom.find('.J_navL');
+    		init.init({
+    			parentDom : parentDom,
+    			navL : navL
+    		});
+    	});
+    })
+</script>
+
+</body>
+</html>

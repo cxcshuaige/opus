@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title>倒计时</title>		
+	</head>
+	<body>
+		<div>
+		    <span>倒计时：</span>
+		    <span id="year"></span>年
+		    <span id="month"></span>月
+		    <span id="day"></span>日
+		    <span id="hour"></span>小时
+		    <span id="mini"></span>分
+		    <span id="sec"></span>秒
+		    <span id="msec"></span>
+		</div>
+
+	<script src="../../js/seajs/2.1/sea.js"></script>
+	<script src="../../js/config.js"></script>
+	<script type="text/javascript">
+		seajs.use(['$','app/timecount/timecount'],function($,timecount){
+			$(function($){
+
+				var zxx = {
+			        $: function(id){
+			            return document.getElementById(id);    
+			        },
+			        futureDate: '',
+			        obj: function(){
+			            return {
+			                sec: zxx.$("sec"),
+			                msec: zxx.$("msec"),
+			                mini: zxx.$("mini"),
+			                hour: zxx.$("hour"),
+			                day: zxx.$("day"),
+			                month: zxx.$("month"),
+			                year: zxx.$("year")
+			            }
+			        }
+			    };
+
+				new timecount(zxx.futureDate, zxx.obj(),function(){
+					console.log('时间到')
+				});
+			});
+		});
+	</script>
+	</body>
+</html>

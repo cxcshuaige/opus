@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>瀑布流实践</title>
+<style type="text/css">
+*{margin: 0;padding: 0;}
+#wook{position: relative;width: 1100px;margin:0 auto;height: 1000px;}
+#fuck li{display: none;border: 1px solid #ccc;background: #fff;padding:5px;position: absolute;list-style:none;}
+#fuck li img{vertical-align: top; background:url(http://www.kadang.com/kadang/themes/v5.0/img/load.gif) no-repeat center center;}
+#fuck li p{width:200px;}
+.fullWook{background: #ccc;}
+</style>
+</head>
+<body>
+    <a href="javascript:{}" id="dian">c</a>
+    <div id="c"><a href="javascript:{}" data-fliter="c1">c1</a><a href="javascript:{}" data-fliter="c2">c2</a></div>
+<div class="k_w" id="wook">
+	<ul id="fuck">
+		<li><img src="images/image_1.jpg" width="200" height="283"><p>1</p></li>
+        <li class="c1 c2"><img src="images/image_2.jpg" width="200" height="300"><p>2</p></li>
+        <li><img src="images/image_3.jpg" width="200" height="252"><p>3</p></li>
+        <li class="c2"><img src="images/image_4.jpg" width="200" height="158"><p>4</p></li>
+        <li><img src="images/image_5.jpg" width="200" height="300"><p>5</p></li>
+        <li class="c1 c2"><img src="images/image_6.jpg" width="200" height="297"><p>6</p></li>
+        <li><img src="images/image_7.jpg" width="200" height="200"><p>7</p></li>
+        <li class="c2"><img src="images/image_8.jpg" width="200" height="200"><p>8</p></li>
+        <li><img src="images/image_9.jpg" width="200" height="398"><p>9</p></li>
+        <li><img src="images/image_10.jpg" width="200" height="267"><p>10</p></li>
+        <li><img src="images/image_1.jpg" width="200" height="283"><p>11</p></li>
+        <li class="c1"><img src="images/image_2.jpg" width="200" height="300"><p>12</p></li>
+        <li><img src="images/image_3.jpg" width="200" height="252"><p>13</p></li>
+        <li><img src="images/image_4.jpg" width="200" height="158"><p>14</p></li>
+        <li><img src="images/image_5.jpg" width="200" height="300"><p>15</p></li>
+        <li><img src="images/image_6.jpg" width="200" height="297"><p>16</p></li>
+        <li class="c1"><img src="images/image_7.jpg" width="200" height="200"><p>17</p></li>
+        <li class="c1"><img src="images/image_8.jpg" width="200" height="200"><p>18</p></li>
+        <li class="c1"><img src="images/image_9.jpg" width="200" height="398"><p>19</p></li>
+        <li><img src="images/image_10.jpg" width="200" height="267"><p>20</p></li>
+        <li class="c1"><img src="images/image_1.jpg" width="200" height="283"><p>21</p></li>
+        <li><img src="images/image_2.jpg" width="200" height="300"><p>22</p></li>
+        <li><img src="images/image_3.jpg" width="200" height="252"><p>23</p></li>
+        <li><img src="images/image_4.jpg" width="200" height="158"><p>24</p></li>
+        <li><img src="images/image_5.jpg" width="200" height="300"><p>25</p></li>
+        <li><img src="images/image_6.jpg" width="200" height="297"><p>26</p></li>
+        <li><img src="images/image_7.jpg" width="200" height="200"><p>27</p></li>
+        <li><img src="images/image_8.jpg" width="200" height="200"><p>28</p></li>
+        <li><img src="images/image_9.jpg" width="200" height="398"><p>29</p></li>
+        <li><img src="images/image_10.jpg" width="200" height="267"><p>30</p></li>
+	</ul>
+</div>
+<script src="../../js/seajs/2.1/sea.js"></script>
+<script src="../../js/config.js"></script>
+<script type="text/javascript">
+seajs.use(['$','app/wookmark/Wookmark.js'],function($,wookmark){
+    var fucks = $('#fuck li');
+    var options = {
+        align: 'center',   //布局参数  left right center
+        autoResize: false, //是否支持窗口重置
+        container: $('#wook'),   //瀑布流所在容器
+        itemWidth: 0,       //瀑布单元的宽度
+        offset: 8,   //每个单元的水平间隔距离
+        resizeDelay: 50
+    }
+    var wook = new wookmark(options);
+    wook.layout(fucks);
+    wook.fullWook();  //补齐空余
+
+    $('#c a').each(function(){
+        $(this).click(function(){
+            wook.fliterItem($(this).attr('data-fliter'));
+        })
+    })
+
+    $('#dian').click(function(){
+        wook.fliterItem();
+    })
+
+//当autoResize为true时
+    // $(window).resize(function(){
+    //     var fucks = $('#fuck li');
+    //     $('#wook').css('width',$(window).width())
+    //     $(window).trigger('wookmark-resize',[fucks]);
+    // })
+})
+</script>
+</body>
+</html>

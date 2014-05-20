@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>分页组件</title>
+	<style type="text/css">
+		.c_pageListCut li{width:500px;height:50px;margin-top:10px;border:1px solid #000;}
+		.c_pageListPage li{float: left;display: inline;width:20px;height:20px;text-align: center;margin-left: 2px;}
+		.c_pageListPage li a{border:1px solid #000;display: block;}
+		.c_pageListPage li .cur{border:1px solid #b00;}
+		.c_pageListPage .c_line a{border:none;}
+		.c_pageListPage .c_line{width: 50px;}
+		ul li{list-style-type: none;}
+		.c_pageListPage .c_prev,.c_pageListPage .c_next{width:60px;}
+	</style>
+</head>
+<body>
+	<table id="Room" class="c_pageListCut"></table>
+	<ul id="ListPage" class="c_pageListPage"></ul>
+	<script src="../../js/seajs/2.1/sea.js"></script>
+	<script src="../../js/config.js"></script>
+	<script type="text/javascript">
+		seajs.use(['$','app/fenye/PageListCut'],function($,PageListCut){
+			$(function($){
+				var pageCut = ['a1','b1','c1','d1','e1','f1','g1','h1','i1','j1','k1','m1','n1','m1','n1','n1','k1','m1','n1','m1','n1','n1','b1','c1','d1','e1','f1','g1','h1','i1','j1','k1','m1','n1','m1','n1','n1','k1','m1','n1','m1','n1','n1','b1','c1','d1','e1','f1','g1','h1','i1','j1','k1','m1','n1','m1','n1','n1','k1','m1','n1','m1','n1','n1','b1','c1','d1','e1','f1','g1','h1','i1','j1','k1','m1','n1','m1','n1','n1','k1','m1','n1','m1','n1','n1','n1','b1','c1','d1','e1','f1','g1','h1','i1','j1','k1','m1','n1','m1','n1','n1','k1','m1','n1','m1','n1','n1','b1','c1','d1','e1','f1','g1','h1','i1','j1','k1','m1','n1','m1','n1','n1','k1','m1','n1','m1','n1','n1','b1','c1','d1','e1','f1','g1','h1','i1','j1','k1','m1','n1','m1','n1','n1','k1','m1','n1','m1','n1','n1','b1','c1','d1','e1','f1','g1','h1','i1','j1','k1','m1','n1','m1','n1','n1','k1','m1','n1','m1','n1','n1','a1','b1','c1','d1','e1','f1','g1','h1','i1','j1','k1','m1','n1','m1','n1','n1','k1','m1','n1','m1','n1','n1','b1','c1','d1','e1','f1','g1','h1','i1','j1','k1','m1','n1','m1','n1','n1','k1','m1','n1','m1','n1','n1','b1','c1','d1','e1','f1','g1','h1','i1','j1','k1','m1','n1','m1','n1','n1','k1','m1','n1','m1','n1','n1','b1','c1','d1','e1','f1','g1','h1','i1','j1','k1','m1','n1','m1','n1','n1','k1','m1','n1','m1','n1','n1','n1','b1','c1','d1','e1','f1','g1','h1','i1','j1','k1','m1','n1','m1','n1','n1','k1','m1','n1','m1','n1','n1','b1','c1','d1','e1','f1','g1','h1','i1','j1','k1','m1','n1','m1','n1','n1','k1','m1','n1','m1','n1','n1','b1','c1','d1','e1','f1','g1','h1','i1','j1','k1','m1','n1','m1','n1','n1','k1','m1','n1','m1','n1','n1','b1','c1','d1','e1','f1','g1','h1','i1','j1','k1','m1','n1','m1','n1','n1','k1','m1','n1','m1','n1','n1','n1'];
+				var pageNum = 5;
+				var $targetRoom = jQuery('#Room');
+				var $targetListPageRoom = jQuery('#ListPage');
+				var creatRowFn = function(data){
+					var content = '<tr><td>'+ data+'</td></tr>';
+					return content;
+				}
+				new PageListCut({
+					pageCut : pageCut,
+					pageNum : pageNum,
+					targetRoom : $targetRoom,
+					targetListPageRoom : $targetListPageRoom,
+					creatRowObj : {
+						isCustom : true,
+						customType : {
+							customTypeDom : 'table',
+							customTypeTabelTitile : ['标题1','标题2','标题3']
+						}, 
+						creatRowFn : creatRowFn
+					},
+					callBack : function(){
+						$targetRoom.find('td').each(function(i){
+							jQuery(this).click(function(){
+								alert(i);
+							});
+						});
+					}
+				});
+			});
+		});
+	</script>
+</body>
+</html>

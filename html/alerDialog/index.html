@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title>弹窗组件</title>
+		<style type="text/css">
+			*{margin:0px;}
+			.c_modelLayer{position:absolute;top:0;left:0;background:#000;filter:alpha(opacity=40);-moz-opacity:0.4;-khtml-opacity:0.4;opacity:0.4;z-index:8000;}
+			.c_modelLayer .c_modelLayerIf{position:absolute;top:0;background:#000;left:0;width:100%;height:100%;z-index:-1;} /* if IE6 */
+			.c_alertLayer{position:absolute;z-index:9000;padding:5px;overflow:hidden;*zoom:1;}
+			.c_alertLayer .c_alertCons{background:#fff;width:100%;position:relative;z-index:9001;height:100%;}
+			.c_alertLayer .c_alertTit{height:38px;line-height:38px;padding-left:20px;background:#1e1e1e;border-bottom:1px solid #ddd;font-size:14px;cursor:move;color: #fff;}
+			.c_alertLayer .c_alertClose{color:#fff;position:absolute;background-position:-57px 0;width:19px;height:19px;top:8px;right:10px;cursor:pointer;}
+			.c_alertLayer .c_alertContent{padding:25px;}
+			.c_alertLayer .c_alertBtnDiv{text-align:center;}
+			.c_alertLayer .c_bg{background:#000;width:1000px;height:1000px;position:absolute;z-index:0;top:0px;left:0px;filter:alpha(opacity=20);-moz-opacity:0.2; -khtml-opacity:0.2;opacity:0.2;}
+			.c_alertTips{font-size:18px;color:#b00;}
+		</style>
+	</head>
+	<body>
+		<select name="na" id="" class="sele">
+			<option value="1">d</option>
+		</select>
+		<input type="button" id="bt1" value="点击弹出1" />
+		<input type="button" id="bt2" value="点击弹出2" />
+		<input type="button" id="bt3" value="点击弹出3" />
+		<input type="button" id="bt4" value="点击弹出4" />
+
+		<script src="../../js/seajs/2.1/sea.js"></script>
+		<script src="../../js/config.js"></script>
+		<script type="text/javascript">
+			seajs.use(['$','app/alerDialog/AlertDialog.js'],function($,AlertDialog){
+				$(function($){
+					$('#bt1').click(function(){
+			//这里的0表示建立第一个弹窗，如建立第二个不同弹窗请输入不同值,例如设置为1,建议设置个位数否则影响性能
+						var bb = AlertDialog.get(0,{
+							alertId:'alert1',
+							title:'弹窗标题1',
+							content:'我是弹窗1',
+							width:700,
+							height:200,
+							isBtn:false,
+							model : true
+						});
+							bb.showAlert();
+					});
+
+					$('#bt2').click(function(){
+						//没有按钮
+						var cc = AlertDialog.get(1,{
+							alertId:'alert2',
+							title:'弹窗标题2',
+							content:'我是弹窗2',
+							isBtn:false,
+							model : true
+						});
+						cc.showAlert();
+					});
+
+				// 一个按钮
+					$('#bt3').click(function(){
+						var dd = AlertDialog.get(2,{
+							alertId:'alert3',
+							title:'弹窗标题3',
+							content:'我是弹窗3',
+							isBtn:true,
+							btnClass : ['关闭|guanbi'],
+							callBack : bb,
+							model : true
+						});
+						dd.showAlert();
+						function bb(e){
+							alert(e);
+						}
+					});
+				// 两个按钮
+					$('#bt4').click(function(){
+						var ff = AlertDialog.get(3,{
+							alertId:'alert4',
+							title:'弹窗标题4',
+							content:'我是弹窗4',
+							isBtn:true,
+							btnClass : ['确定|queding','关闭|guanbi'],
+							callBack : bb,
+							model : true
+						});
+						ff.showAlert();
+						function bb(e){
+							alert(e);
+						}
+					});
+				});
+			});
+		</script>
+	</body>
+</html>

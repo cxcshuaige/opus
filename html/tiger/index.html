@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title>老虎机抽奖</title>		
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			ul{list-style: none;}
+			.main_left{width:670px;margin-bottom:20px;}
+			.main_left dt{height:60px;position: relative;background:#fe9d00;text-align: center;line-height:60px;color: #b00;font-weight:bold;font-size:18px;}
+			.main_left dd{margin:0 10px;height:480px;background:#fff url(img/tips.png) no-repeat 468px 1px;padding-top:1px;}
+			/*--- 抽奖 ---*/
+			.mechine{margin-top:65px;margin-left:30px;width:543px;height:396px;background:url(img/mechine.gif) no-repeat;position: relative;}
+			.mechine .yinyin{position: absolute;left:44px;top:55px;width:440px;height:244px;background:url(img/yinyin.png) no-repeat;_background:none;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale,src="img/yinyin.png");}
+			.lotteryMainDiv{position: relative;overflow: hidden;height:240px;width: 130px;float: left;display: inline;margin-top:57px;}
+			.lcont{position: absolute;height:1360px;width:100%;top:-80px;}
+			.lb{position: absolute;top:4px;right:-64px;height:183px;width:65px;cursor:pointer;background:url(img/lg.png) no-repeat;}
+			.lbCur{background:url(img/lg.gif) no-repeat;}
+			.awardPerch{background:url(img/award.jpg) no-repeat;}
+			.awardPerch .ap{height:136px;width:100%;}
+			.ml51{margin-left:51px;}
+			.ml18{margin-left:18px;}
+			.alertContent{position: relative;height:90px;}
+			.alertQuery .content{padding:0;}
+			.alertInfo .content{background:#fff url(about:blank);padding-left:30px;}
+			.alertInfo .controlBar button{display: none;}
+		</style>
+	</head>
+	<body>
+		<div class="k_fl main_left" id="choujiang">
+			<dl>
+				<dt>author:希子</dt>
+				<dd>
+					<div class="mechine" id="LotteryDraw">
+						<div class="lotteryMainDiv ml51">
+							<div class="J_lcont lcont l1">
+								<ul class="J_aP awardPerch">
+								</ul>
+							</div>
+						</div>
+						<div class="lotteryMainDiv ml18">
+							<div class="J_lcont lcont l2">
+								<ul class="J_aP awardPerch">
+								</ul>
+							</div>
+						</div>
+						<div class="lotteryMainDiv ml18">
+							<div class="J_lcont lcont l3">
+								<ul class="J_aP awardPerch">
+								</ul>
+							</div>
+						</div>
+						<span class="lotteryBtn J_lB lb"></span>
+						<div class="yinyin"></div>
+					</div>
+				</dd>
+			</dl>
+		</div>
+
+	<script src="../../js/seajs/2.1/sea.js"></script>
+	<script src="../../js/config.js"></script>
+	<script type="text/javascript">
+		seajs.use('app/tiger/slotLottery120706');
+	</script>
+	</body>
+</html>
