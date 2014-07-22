@@ -18,16 +18,26 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 		<title></title>
+		<style type="text/css">
+			*{margin:0;padding:0;list-style: none;}
+			.m-calendar{width:210px;border: 1px solid #000;}
+				.m-calendar-year{overflow: hidden;*zoom:1;text-align: center;font-size:14px;font-weight: bold;}
+				.m-calendar-week ul,.m-calendar-month ul{overflow: hidden;*zoom:1;}
+				.m-calendar-week li,.m-calendar-month li{float: left;width:30px;height:30px;text-align: center;line-height:30px;}
+				.m-calendar-month .u-ago,
+				.m-calendar-month .u-feture{color: #999;}
+				.m-calendar-month .u-now{background: #b00;}
+		</style>
 	</head>
 	<body>
-		<div class="m-calendar">
-			
-		</div>
 		<script src="../../js/seajs/2.1/sea.js"></script>
 		<script src="../../js/config.js"></script>
 		<script type="text/javascript">
 			seajs.use(['$','app/calendar/Calendar.js'],function($,Calendar){
-				new Calendar();
+				new Calendar({
+					maxYear : 2030,   //设置最大到多少年
+		  			minYear : 2000    //设置最小到多少年
+				});
 			});
 		</script>
 	</body>
