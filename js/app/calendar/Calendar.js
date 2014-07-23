@@ -67,12 +67,84 @@ define(function(require,exports,module){
 		var dt=new Date(year,month-1,day).getDay()/7; return dt;
 	}
 
+//年月弹窗选择插件
+	function CalendarDialogPlugin(){} 
+	CalendarDialogPlugin.prototype.init = function(params,callback){
+		this.p = $.extend({
+			parentDom : '',         //聚焦dom
+			thisYear : 2014,
+			maxYear : 2030,   //设置最大到多少年
+		  	minYear : 2000    //设置最小到多少年
+		},params || {})
+		this._callback = callback;
+		this._creatBasePanel();
+		this._creatYearPanel();
+		this._creatMonthPanel();
+		this._eventrigger();
+	}
+	//创建弹窗基础结构
+	CalendarDialogPlugin.prototype._creatBasePanel = function(){
+		this.diaPanel = $('<div class="m-calendarDia"></div>');
+		this.diaYearPanel = $('<div class="m-calendarDia-year"></div>');
+		this.diaMonthPanel = $('<div class="m-calendarDia-month"></div>');
+		this.diaPanel.append(this.diaYearPanel).append(this.diaMonthPanel);
+		this.p.parentDom.append(this.diaPanel);
+	}
+	//填充年份
+	CalendarDialogPlugin.prototype._creatYearPanel = function(){
+		var html = '<ul>';
+		for(var i = this.p.minYear; i <= this.p.maxYear; i++){
+			if(i == this.p.thisYear) html += '<li class="u-diaThisYear">'+i+'</li>';
+			else html += '<li>'+i+'</li>';
+		}
+		html += '</ul>'
+		this.diaYearPanel.html(html);
+	}
+	//填充月份
+	CalendarDialogPlugin.prototype._creatMonthPanel = function(){
+		var html = '<ul>';
+		for(var i = 1; i <= 12; i++){
+			html += '<li>'+i+'</li>';
+		}
+		html += '</ul>'
+		this.diaMonthPanel.html(html);
+	}
+	//事件注册
+	CalendarDialogPlugin.prototype._eventrigger = function(){
+		var _t = this;
+		var obj = {
+			year : 0,
+			month : 0
+		}
+		this.diaYearPanel.on('click','li',function(e){
+			_t.diaYearPanel.fadeOut(0);
+			_t.diaMonthPanel.fadeIn(300);
+			obj.year = $(this).text();
+		})
+		this.diaMonthPanel.on('click','li',function(e){
+			obj.month = $(this).text() - 1;
+			_t.close();
+			_t._callback(obj);
+		})
+	}
+	//弹窗出现
+	CalendarDialogPlugin.prototype.show = function(){
+		this.diaYearPanel.show();
+		this.diaMonthPanel.hide();
+		this.diaPanel.fadeIn(300);
+	}
+	//弹窗消失
+	CalendarDialogPlugin.prototype.close = function(){
+		this.diaPanel.fadeOut(200);
+	}
 //----
 	Calendar.WEEK = ['日','一','二','三','四','五','六'];
 	function Calendar(params){
 		this.p = $.extend({
 			dom : '',         //聚焦dom
-			format : ''     //设置输出格式  
+			format : '',     //设置输出格式  
+			maxYear : 2030,   //设置最大到多少年
+		  	minYear : 2000    //设置最小到多少年
 		},params || {})
 		this.date = new Date();
 		this.thisYear = this.date.getFullYear();     
@@ -93,13 +165,19 @@ define(function(require,exports,module){
 		this._creatYearTab();
 		this._creatWeekTab();
 		this._creatMonthTab();
-
+		this.dialogPlugin = new CalendarDialogPlugin();
+		this.dialogPlugin.init({
+			parentDom : this.calendarYearPanel.yearTab,   
+			thisYear : this.thisYear,
+			maxYear : this.p.maxYear,   
+		  	minYear : this.p.minYear   
+		},$.proxy(this.plugin,this));
 		this._eventBind();
-
-		this.calendarShow();
-		
 	}
 
+	Calendar.prototype.plugin = function(obj){
+		this.fresh(obj.year,obj.month);
+	}
 
 	Calendar.prototype.fresh = function(year,month){
 		if(year > this.p.maxYear || year < this.p.minYear){
@@ -114,42 +192,50 @@ define(function(require,exports,module){
 	}
 
 	Calendar.prototype._eventBind = function(){
-		this.calendarYearPanel.find('.J_nextYear').click($.proxy(this._nextYearClick,this));
-		this.calendarYearPanel.find('.J_prevYear').click($.proxy(this._prevYearClick,this));
+		var _t = this;
 		this.calendarYearPanel.find('.J_nextMonth').click($.proxy(this._nextMonthClick,this));
 		this.calendarYearPanel.find('.J_prevMonth').click($.proxy(this._prevMonthClick,this));
+		this.calendarYearPanel.find('.J_prevYear').click($.proxy(this._prevYearClick,this));
+		this.calendarYearPanel.find('.J_nextYear').click($.proxy(this._nextYearClick,this));
+		this.calendarYearPanel.yearTab.find('span').click($.proxy(this._yearTabClick,this));
+		this.calendarMonthPanel.on('click','li',function(){
+			_t._monthClick(this)
+		})
+	}
+	Calendar.prototype._monthClick = function(t){
+		var v = this.paramYear+'-'+(this.paramMonth+1)+'-'+$(t).text()
+		if(this.p.dom.get(0).tagName == 'INPUT'){
+			this.p.dom.val(v)
+		}else{
+			this.p.dom.text(v)
+		}
+	}
+	Calendar.prototype._yearTabClick = function(){
+		this.dialogPlugin.show();
 	}
 	Calendar.prototype._nextYearClick = function(){
-		var year = this.paramYear + 1;
+		var year = Number(this.paramYear) + 1;
 		var month = 0;
 		this.fresh(year,month);
 	}
 	Calendar.prototype._prevYearClick = function(){
-		var year = this.paramYear - 1;
+		var year = Number(this.paramYear) - 1;
 		var month = 0;
 		this.fresh(year,month);
 	}
 	Calendar.prototype._nextMonthClick = function(){
-		var month = this.paramMonth + 1;
-		var year = this.paramYear;
+		var month = Number(this.paramMonth) + 1;
+		var year = Number(this.paramYear);
 		if(month > 11){
 			month = 0;
 			year = year + 1;
-		}
-		if(month < 0){
-			month = 11;
-			year = year - 1;
 		}
 		this.fresh(year,month);
 	}
 
 	Calendar.prototype._prevMonthClick = function(){
-		var month = this.paramMonth - 1;
-		var year = this.paramYear;
-		if(month > 11){
-			month = 0;
-			year = year + 1;
-		}
+		var month = Number(this.paramMonth) - 1;
+		var year = Number(this.paramYear);
 		if(month < 0){
 			month = 11;
 			year = year - 1;
@@ -173,7 +259,7 @@ define(function(require,exports,module){
 		if(this.paramYear == this.thisYear && this.paramMonth == this.thisMonth) return true
 		return false;
 	}
-//创建周面板
+	//创建周面板
 	Calendar.prototype._creatWeekTab = function(){
 		var html = '<ul>';
 		for(var i = 0,data = Calendar.WEEK,len = data.length; i < len; i++){
@@ -182,17 +268,22 @@ define(function(require,exports,module){
 		html += '</ul>';
 		this.calendarWeekPanel.append(html);
 	}
-//创建年面板
+	//创建年面板
+	Calendar.prototype._formatMonth = function(month){
+		if(month < 10)	return '0'+month;
+		else return month;
+	}
 	Calendar.prototype._creatYearTab = function(){
-		var html = '<i class="J_prevYear">&lt;&lt;</i><i class="J_prevMonth">&lt;</i><span>';
+		var html = '<i class="J_prevYear iyear">&lt;&lt;</i><i class="J_prevMonth imonth">&lt;</i><div class="J_yearTab yearTab"><span>';
 		html += this.thisYear;
-		html += '年'+(this.thisMonth+1)+'月</span><i class="J_nextMonth">&gt;</i><i class="J_nextYear">&gt;&gt;</i>';
+		html += '年'+this._formatMonth(this.thisMonth+1)+'月</span></div><i class="J_nextMonth imonth">&gt;</i><i class="J_nextYear iyear">&gt;&gt;</i>';
 		this.calendarYearPanel.append(html);
+		this.calendarYearPanel.yearTab = this.calendarYearPanel.find('.J_yearTab');
 	}
 	Calendar.prototype._freshYearTab = function(year,month){
-		this.calendarYearPanel.find('span').text(year+'年'+(month+1)+'月');
+		this.calendarYearPanel.yearTab.find('span').text(year+'年'+this._formatMonth(month+1)+'月');
 	}
-//创建月面板
+	//创建月面板
 	Calendar.prototype._commonMonthTab = function(){
 		function creatMonthType(n){
 			var f = {
@@ -212,7 +303,7 @@ define(function(require,exports,module){
 						html += '<li>'+(j+1)+'</li>';
 					}
 					return html;
-				},
+				}
 			};
 			switch(n){
 				case 1:
@@ -253,7 +344,7 @@ define(function(require,exports,module){
 		var html = this._commonMonthTab();
 		this.calendarMonthPanel.html(html);
 	}
-//----
+	//----
 	Calendar.prototype.calendarShow = function(){
 		if(this.calendarPanel.data('isShow') > 0){
 			this.calendarPanel.show();
