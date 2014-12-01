@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>我去年买了个表</title>
+<style type="text/css">
+	*{margin:0;padding:0}
+	.m-slidePic{overflow: hidden;*zoom:1;width:640px;height:220px;position: relative;background:url(img/loading.gif) no-repeat center center;}
+    .m-slidePic-ul{width:200000px;}
+    .m-slidePic-ul li{float: left;display: inline;padding-left:20px;}
+    .m-slidePic-ul li img{display: block;}
+    .m-slidePic-ul .lst{padding-left:0;}
+    /*-- 轮播图 --*/
+    .c_leftBtn,
+    .c_rightBtn{position: absolute;z-index: 1;right:0;top:90px;text-indent:-9999px;cursor:pointer;}
+    .c_leftBtn{left:0;}
+    .c_indicate{position: absolute;left:50%;bottom:15px;}
+    .c_indicate li{text-indent: -9999px;float: left;display:inline;margin-right:10px;font-size:0;line-height:0;width:11px;height: 11px;cursor:pointer;background:#adadad;
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        border-radius:10px;
+    }
+    .c_indicate .cur{background:#f60;}
+    .pic-video .c_leftBtn{position: absolute;display: none;top:50%;margin-top:-51px;background:url(img/picLbtn.png) no-repeat 0;width:36px;height:102px;_background:none;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale,src="http://app.game.163.com/temp/game163/img/picLbtn.png");}
+    .pic-video .c_leftBtn:hover{filter:alpha(opacity=90);-moz-opacity:0.9;-khtml-opacity: 0.9;opacity: 0.9;}
+    .pic-video .c_rightBtn{position: absolute;display: none;top:50%;margin-top:-51px;background:url(img/picRbtn.png) no-repeat 0;width:36px;height:102px;_background:none;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale,src="http://app.game.163.com/temp/game163/img/picRbtn.png");}
+    .pic-video .c_rightBtn:hover{filter:alpha(opacity=90);-moz-opacity:0.9;-khtml-opacity: 0.9;opacity: 0.9;}
+</style>
+
+</head>
+<body>
+    <div class="pic-video">
+        <div class="m-slidePic" id="PicReader">
+            <ul class="J_slide m-slidePic-ul">
+                
+                <li class="J_cell  lst "><img src="http://img1.cache.netease.com/game/img13/common/assets/img/px.gif" src3="http://s.cimg.163.com/i/img3.cache.netease.com/photo/0031/2012-03-12/7SDGJDTO4UUJ0031.jpg.100000x320.70.jpg" alt="愤怒的小鸟图片"/></li>
+                
+                <li class="J_cell "><img src="http://img1.cache.netease.com/game/img13/common/assets/img/px.gif" src3="http://s.cimg.163.com/i/img3.cache.netease.com/photo/0031/2012-03-12/7SDGJEE94UUJ0031.jpg.100000x320.70.jpg" alt="愤怒的小鸟图片"/></li>
+                
+                <li class="J_cell "><img src="http://img1.cache.netease.com/game/img13/common/assets/img/px.gif" src3="http://s.cimg.163.com/i/img3.cache.netease.com/photo/0031/2012-03-12/7SDGJEUF4UUJ0031.jpg.100000x320.70.jpg" alt="愤怒的小鸟图片"/></li>
+                
+                <li class="J_cell "><img src="http://img1.cache.netease.com/game/img13/common/assets/img/px.gif" src3="http://s.cimg.163.com/i/img4.cache.netease.com/photo/0031/2012-03-12/7SDGJFFF4UUJ0031.jpg.100000x320.70.jpg" alt="愤怒的小鸟图片"/></li>
+                
+                <li class="J_cell "><img src="http://img1.cache.netease.com/game/img13/common/assets/img/px.gif" src3="http://s.cimg.163.com/i/img4.cache.netease.com/photo/0031/2012-03-12/7SDGJFUC4UUJ0031.jpg.100000x320.70.jpg" alt="愤怒的小鸟图片"/></li>
+                
+            </ul>
+        </div>
+    </div>
+    <script src="../../js/seajs/2.1/sea.js"></script>
+	<script src="../../js/config.js"></script>
+    <script type="text/javascript">
+        seajs.use(['$','app/picReader/ScrollPicSimple'],function($, ScrollPicSimple){
+            var readerContainer = $('#PicReader');
+            setTimeout(function(){
+                if(readerContainer.size() > 0 && readerContainer.find('.J_slide').find('.J_cell').size() > 0){
+                    var sps = new ScrollPicSimple({
+                        slideContainerWrap : readerContainer,
+                        callback : function(){
+                            var hash = location.hash;
+                            if(hash) {
+                                setTimeout(function(){
+                                    location.href = hash;
+                                    var sn = Number($(window).scrollTop());
+                                    $(window).scrollTop(sn-80)
+                                },500)
+                            }
+                        }
+                    });
+                }else{
+                    readerContainer.hide();
+                }
+            },5);
+            
+        })
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title>图片轮播</title>		
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			ul li{list-style: none;}
+			img{border:none;}
+			 .m-tabs{padding:4px;width:940px;height:450px;border: 1px solid #cccccc;position: relative;}
+	        .com_tabs2{border-bottom: 1px solid #ccc;border-left: 1px solid #ccc;font-size: 14px;overflow: hidden;*zoom:1;}
+	        .com_tabs2 li{float: left;width:131px;text-align: center;line-height: 40px;height:40px;border-top: 1px solid #ccc;border-right: 1px solid #ccc;position: relative;}
+	        .com_tabs2 li span{display: block;background: #ebebeb;cursor:pointer;}
+	        .com_tabs2 .cur span{position: absolute;width:131px;line-height: 40px;height:42px;right:0;top:-5px;left:-1px;border-top: 4px solid #ccc;border-left: 1px solid #ccc;border-right: 1px solid #ccc;background: #fff;color: #3768d0;font-weight: bold;}
+		</style>
+		
+	</head>
+	<body>
+		<div id="GameSwitch2" class="pt20">
+            <ul class="com_tabs2 clearfix">
+                <li class="J_handler"><span>32强小组赛</span></li>
+                <li class="J_handler"><span>16强小组赛</span></li>
+                <li class="J_handler"><span>8强淘汰赛</span></li>
+            </ul>
+            <div class="J_target index_newPerson_c ovh">
+            	sdfs
+            </div>
+            <div class="J_target index_newPerson_c ovh">
+            	dsgaghewge
+            </div>
+            <div class="J_target index_newPerson_c ovh">
+            	dsgaghewge
+            </div>
+		</div>
+
+		<script src="../../js/seajs/2.1/sea.js"></script>
+		<script src="../../js/config.js"></script>
+		<script type="text/javascript">
+			seajs.use(['$','app/switchOver/SwitchOver'],function($,SwitchOver){
+				$(function($){
+					var handlers = $('#GameSwitch2 .J_handler'),
+            		targetsDom = $('#GameSwitch2 .J_target');
+			        new SwitchOver({
+			            handlers : handlers,
+			            targetsDom : targetsDom,
+			            type:'click',
+			            focusIndex:0        
+			        });
+				});
+			});
+		</script>
+	</body>
+</html>
