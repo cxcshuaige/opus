@@ -53,42 +53,54 @@ define(function(require,exports,module){
 			},100);
 		},
 
-		_calcLayerPosition : function(params){
-			var targetPos,popLayerPos,
-			popLayerWidth = this.popLayerDom.width(),
-			popLayerHeight = this.popLayerDom.height(),
-			popLayerPointWidth = this.popLayerPoint.width(),
-			popLayerPointHeight = this.popLayerPoint.height(),
-			w = $(window).height();
-			targetPos = {
-				width:params.targetDom.width(),
-				height: params.targetDom.height(),
-				offset:params.targetDom.offset()
-			};
-			switch(params.direct){
-				case 'bottom': 
-					popLayerPos = {
-						popLayerLeft: parseInt(targetPos.offset.left + targetPos.width/2 - popLayerWidth/2) + params.layerX,
-						popLayerTop: parseInt(targetPos.offset.top + targetPos.height) + popLayerPointHeight + params.layerY,
-						popPointLeft:-popLayerPointWidth,
-						popPointTop:targetPos.height/2 - popLayerPointHeight/2
-					};
-					break;
-				case 'right':
-					popLayerTop = parseInt(targetPos.offset.top + targetPos.height/2 - popLayerHeight/2) + params.layerY;
+        _calcLayerPosition : function(params){
+            var targetPos,popLayerPos,
+                popLayerWidth = this.popLayerDom.width(),
+                popLayerHeight = this.popLayerDom.height(),
+                popLayerPointWidth = this.popLayerPoint.width(),
+                popLayerPointHeight = this.popLayerPoint.height(),
+                w = $(window).height(),
+                ww = $(window).width();
+            targetPos = {
+                width:params.targetDom.width(),
+                height: params.targetDom.height(),
+                offset:params.targetDom.offset()
+            };
+            switch(params.direct){
+                case 'top':
+                    popLayerPos = {
+                        popLayerLeft: parseInt(targetPos.offset.left + targetPos.width/2 - popLayerWidth/2) + params.layerX,
+                        popLayerTop: parseInt(targetPos.offset.top) - popLayerPointHeight - params.layerY,
+                        popPointLeft:popLayerPointWidth,
+                        popPointTop:popLayerHeight - 1
+                    };
+                    break;
+                case 'bottom':
+                    popLayerPos = {
+                        popLayerLeft: parseInt(targetPos.offset.left + targetPos.width/2 - popLayerWidth/2) + params.layerX,
+                        popLayerTop: parseInt(targetPos.offset.top + targetPos.height) + popLayerPointHeight + params.layerY,
+                        popPointLeft:-popLayerPointWidth,
+                        popPointTop:targetPos.height/2 - popLayerPointHeight/2
+                    };
+                    break;
+                case 'right':
+                    popLayerTop = parseInt(targetPos.offset.top + targetPos.height/2 - popLayerHeight/2) + params.layerY;
+                    popLayerLeft = targetPos.offset.left + targetPos.width + popLayerPointWidth + params.layerX
+                    if(popLayerTop <= 0){ //如果弹窗超出了顶部
+                        popLayerTop = 10;
+                    }
+                    if((popLayerTop+popLayerHeight) > w){ //如果弹窗超出了底部
+                        popLayerTop = targetPos.offset.top - popLayerHeight - params.layerY;
+                    }
+                    if((targetPos.offset.left + targetPos.width+popLayerWidth) > ww){ //如果弹窗超出了右边
+                        popLayerLeft = targetPos.offset.left - popLayerWidth - params.layerX
+                    }
 
-					if(popLayerTop <= 0){ //如果弹窗超出了顶部
-						popLayerTop = 10;
-					}
-					if((popLayerTop+popLayerHeight) > w){ //如果弹窗超出了底部
-						popLayerTop = w - popLayerHeight - 10;
-					}
-
-					popPointTop = targetPos.offset.top - popLayerTop + targetPos.height/2 - popLayerPointHeight/2;
-					popLayerPos = {
-						popLayerLeft: targetPos.offset.left + targetPos.width + popLayerPointWidth + params.layerX,
-						popLayerTop: popLayerTop,
-						popPointLeft:-(popLayerPointWidth-params.pointX),
+                    popPointTop = targetPos.offset.top - popLayerTop + targetPos.height/2 - popLayerPointHeight/2;
+                    popLayerPos = {
+                        popLayerLeft: popLayerLeft,
+                        popLayerTop: popLayerTop,
+                        popPointLeft:-(popLayerPointWidth-params.pointX),
 						popPointTop:popPointTop
 					};
 					break;
