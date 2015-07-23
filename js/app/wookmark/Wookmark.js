@@ -14,7 +14,8 @@ define(function(require,exports,module){
 		autoResize: false, //是否支持窗口重置
 		container: $('body'),   //瀑布流所在容器
 		itemWidth: 0,       //瀑布单元的宽度
-		offset: 2,   //每个单元的水平间隔距离
+		offset: 2,   //每个单元的列间隔距离
+		offseth: 20,   //每个单元的水平间隔距离
 		resizeDelay: 50
 	}
 
@@ -60,9 +61,9 @@ define(function(require,exports,module){
 				continue;
 			}
 			tempHeight = offsetTop + itemAry[i-1].outerHeight(true);
-		    offsetTop = tempHeight + this.dto.offset;
+		    offsetTop = tempHeight + this.dto.offseth;
 			itemAry[i].css('top',offsetTop);
-			if(i === len-1) this.columns[index].columnHeight = offsetTop + itemAry[i].outerHeight(true) + this.dto.offset;
+			if(i === len-1) this.columns[index].columnHeight = offsetTop + itemAry[i].outerHeight(true) + this.dto.offseth;
 		}
 		//找到最长的列
 		longest = this._getLongestHeight();
@@ -109,7 +110,7 @@ define(function(require,exports,module){
 			containerWidth = this.dto.container.width();
 		for(var i = 0;i<this.columns.length;i++){
 			if(this.columns[i].columnHeight < longest){
-				height = longest - this.columns[i].columnHeight - this.dto.offset;
+				height = longest - this.columns[i].columnHeight - this.dto.offseth;
 				top = this.columns[i].columnHeight;
 				left = this._calcLeft(i,columnWidth,containerWidth,len);
 				this.dto.container.append('<div class="J_fullWook fullWook" style="position:absolute;height:'+height+'px;width:'+width+'px;top:'+top+'px;left:'+left+'px;"></div>')
@@ -219,7 +220,7 @@ define(function(require,exports,module){
 		
 		
 		//更新当前列的高
-		heights[shortestIndex] = shortest + item.outerHeight(true) + this.dto.offset;
+		heights[shortestIndex] = shortest + item.outerHeight(true) + this.dto.offseth;
 		//构造缓存数据 this.columns
 		this.columns[shortestIndex].columnHeight = heights[shortestIndex];
 		this.columns[shortestIndex].itemAry.push(item);   //缓存索引列里的dom
